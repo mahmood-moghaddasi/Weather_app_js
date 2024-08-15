@@ -111,4 +111,39 @@ body {
 #weather-icon {
   width: 25px;
   margin-top: -5px;
+  margin-left: -5px;
+}
+#forecast {
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
+  margin-top: 170px;
+}
+.weekDay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 120px;
+  -webkit-box-shadow: 0px 0px 23px 10px rgba(33, 104, 255, 0.47);
+  box-shadow: 0px 0px 23px 10px rgba(33, 104, 255, 0.47);
+  padding: 1rem;
+  border-radius: 10px;
+}
+.weekDay h3 {
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  margin-top: 2px;
+  font-size: 14px;
+}
+.weekDay p {
+  font-size: 12px;
+  font-weight: bold;
+}
+.weekDay span {
+  position: relative;
+  bottom: -5px;
+  color: var(--color-secondary);
+  font-size: 12px;
 }
