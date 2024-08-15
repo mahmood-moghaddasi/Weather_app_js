@@ -1,5 +1,4 @@
-const BASE_URL = "https://api.openweathermap.org/data/2.5";
-const API_KEY = "ef8196bfc06c52420a7f1bfdc62d1996";
+import getWeatherData from "./utils/httpReq.js";
 
 const DAYS = [
   "Sunday",
@@ -18,32 +17,6 @@ const weatherCard = document.getElementById("city-stats-card");
 const locationIcon = document.getElementById("location-icon");
 
 const forecast = document.getElementById("forecast");
-
-const getCurrentWeatherByName = (city) => {
-  const url = `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`;
-  return fetch(url).then((data) => {
-    return data.json();
-  });
-};
-const getCurrentWeatherByCoordinates = (lat, lon) => {
-  const url = `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-  return fetch(url).then((data) => {
-    return data.json();
-  });
-};
-
-const get5DayForecastByCoordinates = (lat, lon) => {
-  const url = `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-  return fetch(url).then((data) => {
-    return data.json();
-  });
-};
-const get5DayForecastByName = (city) => {
-  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`;
-  return fetch(url).then((data) => {
-    return data.json();
-  });
-};
 
 const renderCurrentWeather = (data) => {
   const weatherJSx = `
@@ -92,17 +65,16 @@ const searchHandler = async () => {
     alert("please enter city name!");
   }
 
-  const data = await getCurrentWeatherByName(cityName);
+  const data = await getWeatherData("current", cityName);
   renderCurrentWeather(data);
 
-  const forecastData = await get5DayForecastByName(cityName);
+  const forecastData = await getWeatherData("forecast", cityName);
   renderforecastWeather(forecastData);
 };
 const positionCallback = async (position) => {
-  const { latitude, longitude } = position.coords;
-  const currntData = await getCurrentWeatherByCoordinates(latitude, longitude);
+  const currntData = await getWeatherData("current", position.coords);
   renderCurrentWeather(currntData);
-  const forecastData = get5DayForecastByCoordinates(latitude, longitude);
+  const forecastData = getWeatherData("forecast", position.coords);
   renderforecastWeather(forecastData);
 };
 
