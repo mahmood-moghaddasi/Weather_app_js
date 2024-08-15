@@ -39,6 +39,10 @@ body {
 #location-icon {
   width: 22px;
   margin-right: 5px;
+  cursor: pointer;
+}
+#location-icon:hover {
+  width: 25px;
 }
 #search-input {
   height: 24.9px;
@@ -103,4 +107,8 @@ body {
 .air-stats p span {
   color: var(--color-secondary);
   font-weight: 100;
+}
+#weather-icon {
+  width: 25px;
+  margin-top: -5px;
 }
