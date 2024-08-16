@@ -1,4 +1,5 @@
 import getWeatherData from "./utils/httpReq.js";
+import { removeModal, showModal } from "./utils/modal.js";
 
 const DAYS = [
   "Sunday",
@@ -18,7 +19,10 @@ const locationIcon = document.getElementById("location-icon");
 
 const forecast = document.getElementById("forecast");
 
+const modalButton = document.getElementById("modal-button");
+
 const renderCurrentWeather = (data) => {
+  // if (!data) return;
   const weatherJSx = `
   <h1 id="city-name">${data.name},${data.sys.country}</h1>
   <div id="weather-stats">
@@ -41,6 +45,7 @@ const getWeekDay = (date) => {
 };
 
 const renderforecastWeather = (data) => {
+  // if (!data) return;
   forecast.innerHTML = "";
   data = data.list.filter((obj) => obj.dt_txt.endsWith("12:00:00"));
   data.forEach((i) => {
@@ -59,10 +64,12 @@ const renderforecastWeather = (data) => {
 };
 
 const searchHandler = async () => {
+  weatherCard.style.display = "flex";
   const cityName = searchInput.value;
 
   if (!cityName) {
-    alert("please enter city name!");
+    showModal("please enter city name!");
+    return;
   }
 
   const data = await getWeatherData("current", cityName);
@@ -83,12 +90,14 @@ const errorCallback = (error) => {
 };
 
 const locaitionHandler = () => {
+  weatherCard.style.display = "flex";
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(positionCallback, errorCallback);
   } else {
-    alert("your browser does not support geolocation");
+    showModal("your browser does not support geolocation");
   }
 };
 
 searchButton.addEventListener("click", searchHandler);
 locationIcon.addEventListener("click", locaitionHandler);
+modalButton.addEventListener("click", removeModal);

@@ -71,7 +71,7 @@ body {
 }
 
 #city-stats-card {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
@@ -146,4 +146,36 @@ body {
   bottom: -5px;
   color: var(--color-secondary);
   font-size: 12px;
+}
+
+#modal {
+  background-color: rgba(128, 128, 128, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+#modal > div {
+  background-color: white;
+  width: 500px;
+  border-radius: 20px;
+  padding: 30px;
+}
+#modal span {
+  background-color: var(--color-error);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.3rem;
+  transition: all 0.1s ease-in;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#modal p {
+  margin-top: 40px;
+  color: var(--color-error);
 }
